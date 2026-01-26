@@ -38,3 +38,6 @@ next-env.d.ts
 
 # Database files (optional - remove if you want to track them)
 data/
+
+.vercel
+.env*.local
