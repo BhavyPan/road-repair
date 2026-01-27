@@ -45,12 +45,7 @@ export async function POST(request: NextRequest) {
       status: 'reported',
       reportedBy: body.reportedBy || 'Anonymous',
       reportedAt: new Date(),
-      beforePhotos: body.photos || [],
-      aiAnalysis: body.aiAnalysis || {
-        detectedDamage: [body.type],
-        confidence: 0.85,
-        recommendedDepartment: 'Public Works'
-      }
+      beforePhotos: body.photos || []
     }
 
     console.log('Saving report to database...')

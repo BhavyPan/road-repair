@@ -130,12 +130,45 @@ export async function findVolunteerByEmail(email: string): Promise<any | null> {
   }
 }
 
-// Migration utilities
-export async function migrateFromLocalStorage() {
+export async function updateVolunteer(volunteerId: string, updates: any): Promise<any> {
+  await initDatabase()
   try {
-    // This would be called once to migrate existing localStorage data
-    console.log('Migration from localStorage to database completed')
+    const index = inMemoryVolunteers.findIndex(v => v.id === volunteerId)
+    if (index === -1) {
+      throw new Error('Volunteer not found')
+    }
+    inMemoryVolunteers[index] = { ...inMemoryVolunteers[index], ...updates }
+    
+    // Try to save to file system if not in Vercel
+    if (!process.env.VERCEL) {
+      await fs.writeFile(VOLUNTEERS_FILE, JSON.stringify(inMemoryVolunteers, null, 2))
+    }
+    
+    return inMemoryVolunteers[index]
   } catch (error) {
-    console.error('Migration error:', error)
+    console.error('Error updating volunteer:', error)
+    throw error
+  }
+}
+
+export async function deleteVolunteer(volunteerId: string): Promise<boolean> {
+  await initDatabase()
+  try {
+    const index = inMemoryVolunteers.findIndex(v => v.id === volunteerId)
+    if (index === -1) {
+      throw new Error('Volunteer not found')
+    }
+    
+    inMemoryVolunteers.splice(index, 1)
+    
+    // Try to save to file system if not in Vercel
+    if (!process.env.VERCEL) {
+      await fs.writeFile(VOLUNTEERS_FILE, JSON.stringify(inMemoryVolunteers, null, 2))
+    }
+    
+    return true
+  } catch (error) {
+    console.error('Error deleting volunteer:', error)
+    throw error
   }
 }

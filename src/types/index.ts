@@ -27,8 +27,10 @@ export interface Volunteer {
   email: string
   phone: string
   department: string
+  password: string
   isActive: boolean
   completedTasks: number
+  createdAt?: Date
 }
 
 export interface ReportStats {

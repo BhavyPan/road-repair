@@ -1,57 +1,58 @@
 /* Custom styles for RoadGuard */
 .btn-primary {
-  background: linear-gradient(to right, #2563eb, #9333ea);
+  background: linear-gradient(to right, #06b6d4, #3b82f6);
   color: white;
   padding: 1rem 2rem;
   border-radius: 1rem;
   font-weight: 600;
   transition: all 0.3s ease;
   transform: scale(1);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.3);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(to right, #1d4ed8, #7c3aed);
+  background: linear-gradient(to right, #0891b2, #2563eb);
   transform: scale(1.05);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 25px -5px rgba(6, 182, 212, 0.4);
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(6, 182, 212, 0.2);
   color: white;
   padding: 1rem 2rem;
   border-radius: 1rem;
   font-weight: 600;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(6, 182, 212, 0.3);
   transition: all 0.3s ease;
   transform: scale(1);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(6, 182, 212, 0.3);
   transform: scale(1.05);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 25px -5px rgba(6, 182, 212, 0.2);
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.8);
   border-radius: 1.5rem;
   padding: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease;
 }
 
 .card:hover {
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(6, 182, 212, 0.3);
+  box-shadow: 0 25px 50px -12px rgba(6, 182, 212, 0.2);
 }
 
 .input-field {
   width: 100%;
   padding: 1rem 1.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(6, 182, 212, 0.2);
   border-radius: 1rem;
   transition: all 0.3s ease;
   color: white;
@@ -59,8 +60,8 @@
 }
 
 .input-field:focus {
-  border-color: #60a5fa;
-  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.3);
+  border-color: #06b6d4;
+  box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.3);
 }
 
 .input-field::placeholder {
@@ -68,17 +69,18 @@
 }
 
 .input-field:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(6, 182, 212, 0.3);
 }
 
 .glass-morphism {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
 .gradient-text {
-  background: linear-gradient(to right, #60a5fa, #9333ea);
+  background: linear-gradient(to right, #06b6d4, #3b82f6, #8b5cf6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -98,6 +100,22 @@
 
 .animate-fade-in {
   animation: fadeIn 0.8s ease-out;
+}
+
+.animate-slide-right {
+  animation: slideRight 8s ease-in-out infinite;
+}
+
+.animate-slide-left {
+  animation: slideLeft 8s ease-in-out infinite;
+}
+
+.animate-zoom-in {
+  animation: zoomIn 1s ease-out;
+}
+
+.animate-rotate-slow {
+  animation: rotateSlow 20s linear infinite;
 }
 
 .hover-lift {
@@ -130,6 +148,34 @@
   to { opacity: 1; }
 }
 
+@keyframes slideRight {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes slideLeft {
+  0% { transform: translateX(100%); }
+  50% { transform: translateX(-100%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes zoomIn {
+  from { 
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes rotateSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
@@ -147,14 +193,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.5);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, #06b6d4, #3b82f6);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #5a67d8, #6b46c1);
+  background: linear-gradient(135deg, #0891b2, #2563eb);
 }
