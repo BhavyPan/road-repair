@@ -72,6 +72,7 @@ export const mockVolunteers: Volunteer[] = [
     email: 'alice@example.com',
     phone: '+91 98765 43210',
     department: 'Public Works',
+    password: 'password123',
     isActive: true,
     completedTasks: 15
   },
@@ -81,6 +82,7 @@ export const mockVolunteers: Volunteer[] = [
     email: 'bob@example.com',
     phone: '+91 98765 43211',
     department: 'Emergency Services',
+    password: 'password123',
     isActive: true,
     completedTasks: 23
   }
