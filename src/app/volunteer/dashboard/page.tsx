@@ -302,7 +302,7 @@ export default function VolunteerDashboard() {
                       <h3 className="text-xl font-bold text-white mb-2">{report.type}</h3>
                       <p className="text-white/80 flex items-center mb-2">
                         <MapPin className="mr-2" size={16} />
-                        {report.location.address}
+                        {report.location}
                       </p>
                       <p className="text-white/60 text-sm mb-3">
                         Reported: {new Date(report.reportedAt).toLocaleDateString()}
@@ -310,17 +310,17 @@ export default function VolunteerDashboard() {
                       </p>
                       
                       {/* Map Location */}
-                      {(report.location.latitude && report.location.longitude) && (
+                      {(report.latitude && report.longitude) && (
                         <div className="mb-4">
                           <div className="w-full h-32 rounded-lg overflow-hidden border border-white/20">
                             <iframe
-                              src={`https://www.openstreetmap.org/export/embed.html?bbox=${report.location.longitude - 0.005},${report.location.latitude - 0.005},${report.location.longitude + 0.005},${report.location.latitude + 0.005}&layer=mapnik&marker=${report.location.latitude},${report.location.longitude}`}
+                              src={`https://www.openstreetmap.org/export/embed.html?bbox=${report.longitude - 0.005},${report.latitude - 0.005},${report.longitude + 0.005},${report.latitude + 0.005}&layer=mapnik&marker=${report.latitude},${report.longitude}`}
                               className="w-full h-full border-0"
                               loading="lazy"
                             />
                           </div>
                           <button
-                            onClick={() => window.open(`https://www.google.com/maps?q=${report.location.latitude},${report.location.longitude}`, '_blank')}
+                            onClick={() => window.open(`https://www.google.com/maps?q=${report.latitude},${report.longitude}`, '_blank')}
                             className="mt-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 flex items-center"
                           >
                             <MapPin className="mr-2" size={14} />
@@ -412,7 +412,7 @@ export default function VolunteerDashboard() {
 
             <div className="mb-6">
               <h3 className="text-lg font-semibold text-white mb-2">{selectedReport.type}</h3>
-              <p className="text-white/80">{selectedReport.location.address}</p>
+              <p className="text-white/80">{selectedReport.location}</p>
             </div>
 
             <div className="mb-6">

@@ -2,11 +2,9 @@ export interface RoadDamageReport {
   id: string
   type: 'pothole' | 'crack' | 'tree_fall' | 'debris' | 'flood_damage' | 'other'
   description: string
-  location: {
-    latitude: number
-    longitude: number
-    address: string
-  }
+  location: string
+  latitude: number
+  longitude: number
   photos: string[]
   priority: 'high' | 'medium' | 'low'
   status: 'reported' | 'in_progress' | 'completed'

@@ -21,6 +21,7 @@ export const reportsApi = {
   // Create a new report
   async create(reportData: any): Promise<any> {
     try {
+      console.log('API: Creating report with data:', reportData)
       const response = await fetch(`${API_BASE}/reports`, {
         method: 'POST',
         headers: {
@@ -29,14 +30,26 @@ export const reportsApi = {
         body: JSON.stringify(reportData),
       })
       
+      console.log('API: Response status:', response.status)
+      console.log('API: Response ok:', response.ok)
+      
       if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || 'Failed to create report')
+        const errorText = await response.text()
+        console.error('API: Error response:', errorText)
+        let errorData
+        try {
+          errorData = JSON.parse(errorText)
+        } catch {
+          errorData = { error: errorText }
+        }
+        throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`)
       }
       
-      return await response.json()
+      const result = await response.json()
+      console.log('API: Success response:', result)
+      return result
     } catch (error) {
-      console.error('Error creating report:', error)
+      console.error('API: Error creating report:', error)
       throw error
     }
   },

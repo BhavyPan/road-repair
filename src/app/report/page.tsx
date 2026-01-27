@@ -134,6 +134,12 @@ export default function ReportPage() {
 
     setIsSubmitting(true)
 
+    setError('')
+
+    console.log('Form submission started')
+    console.log('Form data:', formData)
+    console.log('Photos count:', photos.length)
+
 
 
     try {
@@ -142,7 +148,7 @@ export default function ReportPage() {
 
       console.log('Converting', photos.length, 'photos to base64...')
 
-      const base64Photos = await Promise.all(photos.map(convertToBase64))
+      const base64Photos = photos.length > 0 ? await Promise.all(photos.map(convertToBase64)) : []
 
       console.log('Photos converted successfully')
 
@@ -158,15 +164,11 @@ export default function ReportPage() {
 
         description: formData.description,
 
-        location: {
+        location: formData.location,
 
-          latitude: parseFloat(formData.latitude) || 0,
+        latitude: parseFloat(formData.latitude) || 0,
 
-          longitude: parseFloat(formData.longitude) || 0,
-
-          address: formData.location
-
-        },
+        longitude: parseFloat(formData.longitude) || 0,
 
         photos: base64Photos as string[],
 
@@ -192,18 +194,19 @@ export default function ReportPage() {
 
       }
 
-
+      
+      console.log('Report object created:', newReport)
 
       // Save to database via API
       console.log('Saving report to database...')
-      await reportsApi.create(newReport)
-      console.log('Report saved successfully')
+      const savedReport = await reportsApi.create(newReport)
+      console.log('Report saved successfully:', savedReport)
 
 
 
       // Simulate API call delay
 
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      await new Promise(resolve => setTimeout(resolve, 1000))
 
       
 
@@ -217,7 +220,7 @@ export default function ReportPage() {
 
       setIsSubmitting(false)
 
-      setError('Failed to submit report. Please try again.')
+      setError('Failed to submit report. Please try again. Error: ' + (error instanceof Error ? error.message : 'Unknown error'))
 
     }
 
@@ -689,7 +692,7 @@ export default function ReportPage() {
 
               type="submit"
 
-              disabled={isSubmitting || !formData.type || !formData.description || !formData.location || photos.length === 0}
+              disabled={isSubmitting || !formData.type || !formData.description || !formData.location}
 
               className="btn-primary text-lg px-12 py-6 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group"
 

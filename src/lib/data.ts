@@ -6,11 +6,9 @@ export const mockReports: RoadDamageReport[] = [
     id: '1',
     type: 'pothole',
     description: 'Large pothole on main street causing traffic issues',
-    location: {
-      latitude: 12.9716,
-      longitude: 77.5946,
-      address: '123 Main Street, Bangalore'
-    },
+    location: '123 Main Street, Bangalore',
+    latitude: 12.9716,
+    longitude: 77.5946,
     photos: ['/api/placeholder/400/300'],
     priority: 'high',
     status: 'reported',
@@ -27,11 +25,9 @@ export const mockReports: RoadDamageReport[] = [
     id: '2',
     type: 'crack',
     description: 'Multiple cracks on the highway shoulder',
-    location: {
-      latitude: 12.9726,
-      longitude: 77.5956,
-      address: 'Highway 42, Bangalore'
-    },
+    location: 'Highway 42, Bangalore',
+    latitude: 12.9726,
+    longitude: 77.5956,
     photos: ['/api/placeholder/400/300'],
     priority: 'medium',
     status: 'in_progress',
@@ -49,11 +45,9 @@ export const mockReports: RoadDamageReport[] = [
     id: '3',
     type: 'tree_fall',
     description: 'Tree fell blocking the road after storm',
-    location: {
-      latitude: 12.9736,
-      longitude: 77.5966,
-      address: 'Park Road, Bangalore'
-    },
+    location: 'Park Road, Bangalore',
+    latitude: 12.9736,
+    longitude: 77.5966,
     photos: ['/api/placeholder/400/300'],
     priority: 'high',
     status: 'completed',

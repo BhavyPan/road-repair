@@ -19,21 +19,27 @@ export async function GET() {
 // POST /api/reports - Create a new report
 export async function POST(request: NextRequest) {
   try {
+    console.log('POST /api/reports - Request received')
     const body = await request.json()
+    console.log('Request body:', JSON.stringify(body, null, 2))
     
     // Validate required fields
     if (!body.type || !body.description || !body.location) {
+      console.log('Validation failed - missing fields:', { type: !!body.type, description: !!body.description, location: !!body.location })
       return NextResponse.json(
         { error: 'Missing required fields: type, description, location' },
         { status: 400 }
       )
     }
     
+    console.log('Validation passed, creating report...')
     const newReport: RoadDamageReport = {
       id: Date.now().toString(),
       type: body.type,
       description: body.description,
       location: body.location,
+      latitude: body.latitude || 0,
+      longitude: body.longitude || 0,
       photos: body.photos || [],
       priority: body.priority || 'medium',
       status: 'reported',
@@ -47,13 +53,15 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    console.log('Saving report to database...')
     const savedReport = await saveReport(newReport)
+    console.log('Report saved successfully:', savedReport.id)
     
     return NextResponse.json(savedReport, { status: 201 })
   } catch (error) {
     console.error('Error creating report:', error)
     return NextResponse.json(
-      { error: 'Failed to create report' },
+      { error: 'Failed to create report: ' + (error instanceof Error ? error.message : 'Unknown error') },
       { status: 500 }
     )
   }
